@@ -91,13 +91,11 @@ in
     }];
   };
 
-  users.groups.media.members = [ "nrd" ];
-
   users.users.nrd = {
     uid = 1000;
     description = name;
     isNormalUser = true;
     hashedPassword = fileContents ../../secrets/nrd;
-    extraGroups = [ "wheel" "input" "networkmanager" "libvirtd" ];
+    extraGroups = [ "wheel" ];
   };
 }

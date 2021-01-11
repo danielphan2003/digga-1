@@ -10,7 +10,6 @@ in
     ../profiles/network/torrent.nix
     ../profiles/db/postgres
     ../profiles/ssh
-    ../users/nrd
   ];
 
   fileSystems."/" = {

@@ -3,7 +3,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../users/nrd
     ../profiles/graphical
     ../profiles/laptop
     ../profiles/misc/disable-mitigations.nix
