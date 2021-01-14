@@ -54,6 +54,11 @@
               inherit lib osPkgs unstablePkgs utils externModules system;
             });
 
+          homeConfigurations = 
+            builtins.mapAttrs 
+              (_: config: config.config.home-manager.users) 
+              self.nixosConfigurations;
+
           overlay = import ./pkgs;
 
           overlays = pathsToImportedAttrs overlayPaths;
@@ -80,7 +85,9 @@
               });
           in
           {
-            inherit packages;
+            packages = packages // 
+              utils.genHomeActivationPackages 
+                self.homeConfigurations; 
 
             devShell = import ./shell.nix {
               inherit pkgs;
