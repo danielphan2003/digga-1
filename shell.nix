@@ -16,7 +16,7 @@ let
 
   flk = pkgs.writeShellScriptBin "flk" ''
     if [[ -z "$1" ]]; then
-      echo "Usage: $(basename "$0") [ iso | up | install {host} | {host} [switch|boot|test] ]"
+      echo "Usage: $(basename "$0") [ iso | up | install {host} | {host} [switch|boot|test] | home {host} {user} [switch] ]"
     elif [[ "$1" == "up" ]]; then
       mkdir -p up
       hostname=$(hostname)
@@ -31,6 +31,11 @@ let
       nix build $DEVSHELL_ROOT#nixosConfigurations.niximg.${build}.isoImage "${"\${@:2}"}"
     elif [[ "$1" == "install" ]]; then
       sudo nixos-install --flake ".#$2" "${"\${@:3}"}"
+    elif [[ "$1" == "home" ]]; then
+      nix build ./#hmActivationPackages.$2.$3
+      if [[ "$4" == "switch" ]]; then
+        ./result/activate && unlink result
+      fi
     else
       sudo nixos-rebuild --flake ".#$1" "${"\${@:2}"}"
     fi
