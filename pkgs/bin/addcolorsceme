@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-cofold=~/.config/herbstluftwm/colorschemes/
-name="$(zenity --entry --title="Color Selection" --text="Pick a Name for Your Scheme\nAlready taken:\n$(ls $cofold)")"
-bgcolor=$(zenity --entry --title="Color Selection" --text="Pick the Background Color")
-fgcolor=$(zenity --entry --title="Color Selection" --text="Pick the Foreground Color")
-printf "export bgcolor='$bgcolor'\nexport fgcolor='$fgcolor'" > $cofold/"$name".sh

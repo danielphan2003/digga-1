@@ -1,9 +1,0 @@
-#!/bin/sh
-temp=/tmp/getepub/
-mkdir $temp
-cd $temp
-getgbook $1
-cd $1
-xbooktxt
-ebook-convert final.txt ~/Documents/final.epub
-rm -r $temp

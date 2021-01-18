@@ -1,1 +1,0 @@
-env WINEPREFIX="/home/pachums/config/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/pachums/config/.wine/dosdevices/c:/users/Public/Desktop/mIRC.lnk

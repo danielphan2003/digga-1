@@ -1,9 +1,0 @@
-#!/bin/bash
-action=$(printf "start\nstop\nenable\ndisable" | rofi -dmenu)
-if [[ $1 -eq "-u" ]]; then
-	unit=$(systemctl --user list-unit-files | sed /^$/d | sed '1d;$d;' | rofi -dmenu | sed '1{s/[^ ]\+\s*$//}' | tr -d ' ')
-	systemctl --user $action $unit
-else
-	unit=$(systemctl list-unit-files | sed /^$/d | sed '1d;$d;' | rofi -dmenu | sed '1{s/[^ ]\+\s*$//}' | tr -d ' ')
-	systemctl $action $unit
-fi

@@ -1,2 +1,0 @@
-#!/bin/bash
-/usr/bin/env python ~/software/stream2chromecast/stream2chromecast.py $@
