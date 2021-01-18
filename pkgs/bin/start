@@ -1,0 +1,18 @@
+#!/bin/sh
+echo "1)browser   2)office   3)Files   4)Eclipse   5)Games"
+read input
+case $input in
+  "1")ie8 &;;
+  "2")libreoffice &;;
+  "3")nautilus &;;
+  "4")/home/pachums/eclipse/java-mars/eclipse/eclipse &;;
+  "5")echo "a)minecraft  b)undertale c)the escapists"
+      read inp
+      case $inp in
+        "a")minecraft &;;
+        "b")undertale &;;
+        "c")theescapists &;;
+      esac
+      ;;
+esac
+start

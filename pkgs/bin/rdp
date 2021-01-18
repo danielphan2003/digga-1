@@ -1,0 +1,13 @@
+#!/bin/sh
+shsh=
+for i in $@
+do
+  shsh+="$i "
+done
+if [ $1 == "-troop" ]
+then
+  rdesktop -u Administrator -p Pr@n@v001! -f 64.71.75.56
+else 
+  rdesktop $shsh
+fi
+

@@ -1,0 +1,8 @@
+toggle
+play
+pause
+stop
+next
+previous
+status
+metadata

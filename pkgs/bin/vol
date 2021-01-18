@@ -1,0 +1,18 @@
+#!/bin/bash
+if [[ $cvol < 150 ]];then
+	pactl set-sink-volume @DEFAULT_SINK@ $1
+fi
+cvol=`pamixer --get-volume`
+if [ $cvol == 0 ]; then
+	cvol='--mute'
+fi
+#if [ $cvol -ge 1 -a $cvol -le 50 ]; then
+#	icon=audio-volume-low
+#elif [ $cvol -ge 51 -a $cvol -le 100 ]; then
+#	icon=audio-volume-medium
+#elif [ $cvol -ge 101 -a $cvol -le 150 ]; then
+#	icon=audio-volume-high
+#else
+#	icon=audio-volume-muted
+#fi
+volnoti-show $cvol > /dev/null

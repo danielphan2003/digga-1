@@ -1,0 +1,6 @@
+#!/bin/bash
+e=`cat ~/bin/playerctl_options.txt | rofi -dmenu`
+if [[ "$e" == "toggle" ]]; then
+	e=play-pause
+fi
+notify-send "`playerctl $e`"

@@ -1,0 +1,11 @@
+
+
+#!/bin/bash
+if [ -f /tmp/shift ]
+then
+  xte "keydown Shift_L" "key $1" "keyup Shift_L"
+  rm -f /tmp/shift
+else
+  xte "key $1"
+fi
+

@@ -1,0 +1,2 @@
+#!/bin/bash
+vboxsdl --startvm "usm"

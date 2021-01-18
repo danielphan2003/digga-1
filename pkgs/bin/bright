@@ -1,0 +1,4 @@
+#!/bin/bash
+cbatt=`cat /sys/class/backlight/*/brightness`
+((e=$cbatt$1))
+echo $e > /sys/class/backlight/*/brightness

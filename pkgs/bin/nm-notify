@@ -1,0 +1,10 @@
+#!/bin/bash
+lfile="$HOME/.cache/nm-notify.log"
+> $lfile
+nmcli monitor >> $lfile 2>&1 &
+
+while inotifywait -e modify $lfile; do
+ iline=$(tail -n 1 $lfile)
+ notify-send "$iline"
+done
+		 

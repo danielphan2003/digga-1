@@ -1,12 +1,8 @@
-final: prev: {
-  sddm-chili =
-    prev.callPackage ./applications/display-managers/sddm/themes/chili { };
-  dejavu_nerdfont = prev.callPackage ./data/fonts/dejavu-nerdfont { };
-  purs = prev.callPackage ./shells/zsh/purs { };
-  pure = prev.callPackage ./shells/zsh/pure { };
-  wii-u-gc-adapter = prev.callPackage ./misc/drivers/wii-u-gc-adapter { };
-  libinih = prev.callPackage ./development/libraries/libinih { };
-  steamcompmgr =
-    prev.callPackage ./applications/window-managers/steamcompmgr { };
-  miningcore = prev.callPackage ./applications/blockchains/miningcore { };
+final: prev: { 
+  heroic-launcher = prev.callPackage ./heroic { };
+  mindustry = prev.callPackage ./mindustry { };
+  deadd-notification-center = prev.callPackage ./linux-notification-center { };
+  cups-pdf = prev.callPackage ./cups-pdf { };
+  brlaser = prev.callPackage ./brlaser { };
+  leonflix = prev.callPackage ./leonflix { };
 }

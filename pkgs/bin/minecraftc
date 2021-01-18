@@ -1,0 +1,7 @@
+#!/bin/sh
+HD=~/software/atlauncher/
+HDJ=$HD/minecraftc.jar
+[ ! -d ${HD} ] && mkdir $HD
+[ ! -f ${HDJ} ] && wget -O $HDJ https://www.atlauncher.com/download/jar
+wmname LG3D
+java -jar $HDJ

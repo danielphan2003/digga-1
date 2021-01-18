@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ $# -eq 2 ]; then
+    find $1 2>/dev/null | grep $2
+else
+    find . 2>/dev/null | grep $1
+fi

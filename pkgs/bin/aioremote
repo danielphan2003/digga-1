@@ -1,0 +1,2 @@
+#!/bin/sh
+java -jar /home/pachums/software/AioRemoteDesktop3.5.0/AioRemoteDesktop3.5.0.jar

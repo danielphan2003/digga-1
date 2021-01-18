@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#url=https://www.duckduckgo.com/?q=
+#arg=( $@ )
+#if [[ $1 == "-u" ]]
+#then
+# xdg-open $2
+#else
+#  #for i in $@
+#  #  do
+#  #    url+="$i+"
+#  #  done
+#  url+=$(IFS='+' ; echo "${arg[*]}")
+#  xdg-open "$url"
+#fi
+qutebrowser "$url"
