@@ -1,6 +1,5 @@
-enabledProfiles: let
-  profileImports = map (name: import (./. + "/../profiles/${name}.nix")) enabledProfiles;
-in { config, pkgs, lib, ... }: {
+enabledProfiles:
+{ mapProfiles, config, pkgs, lib, ... }: {
 
   users.users.pachums = {
     hashedPassword = lib.fileContents ../../secrets/userPass;
@@ -11,7 +10,8 @@ in { config, pkgs, lib, ... }: {
   };
 
   home-manager.users.pachums = { ... }: {
-    imports = lib.lists.flatten profileImports;
+    imports = lib.lists.flatten 
+      (map (x: import (./. + "/../profiles/${x}.nix")) enabledProfiles);
     programs.home-manager.enable = true;
     home.stateVersion = config.system.stateVersion;
   };

@@ -127,6 +127,7 @@ in
       min-free = 536870912
       keep-outputs = true
       keep-derivations = true
+      builders-use-substitutes = true
     '';
 
   };

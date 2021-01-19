@@ -3,6 +3,11 @@
 {
 
   home.packages = with pkgs; [
+    universal-ctags
+    ctagsWrapped.ctagsWrapped
+    nix-prefetch-github
+    gradle
+    unrar
     mercurial
     gnumake
     tmux
