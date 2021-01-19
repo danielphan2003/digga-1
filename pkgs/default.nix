@@ -4,5 +4,4 @@ final: prev: {
   deadd-notification-center = prev.callPackage ./linux-notification-center { };
   cups-pdf = prev.callPackage ./cups-pdf { };
   brlaser = prev.callPackage ./brlaser { };
-  leonflix = prev.callPackage ./leonflix { };
 }

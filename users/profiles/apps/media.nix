@@ -7,7 +7,6 @@
     spotify
     gimp
     vlc
-    leonflix
     gnome3.cheese
     gnome3.eog
     krita

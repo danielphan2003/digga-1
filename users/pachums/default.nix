@@ -11,7 +11,7 @@ in { config, pkgs, lib, ... }: {
   };
 
   home-manager.users.pachums = { ... }: {
-    imports = import ../profiles/clibase.nix; #lib.lists.flatten profileImports;
+    imports = lib.lists.flatten profileImports;
     programs.home-manager.enable = true;
     home.stateVersion = config.system.stateVersion;
   };
