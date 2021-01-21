@@ -2,9 +2,9 @@
 {
   services.spotifyd = {
     enable = true;
-    package = (pkgs.spotifyd.override {
-      withMpris = true;
-    });
+    # package = (pkgs.spotifyd.override {
+    #   withMpris = true;
+    # });
     settings = {
       global = {
 	username = "pachum99@gmail.com";

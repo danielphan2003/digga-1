@@ -6,6 +6,7 @@
   ./apps/media.nix
   ./apps/gaming.nix
   ./apps/gnome-extensions.nix
+  ./services/spotifyd.nix
 
 ]
 

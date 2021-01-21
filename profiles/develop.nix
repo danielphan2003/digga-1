@@ -18,15 +18,16 @@ in {
 
   services.openssh.enable = true;
 
+  environment.variables = { EDITOR = "vim"; };
+
   ## Program setup
   programs = {
     java.enable = true;
     zsh.enable = true;
-    vim.defaultEditor = true;
     adb.enable = true;
     # plotinus.enable = true;
   };
 }
-  
+
 
 

@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    giara
     gnome-podcasts
     spotify-tui
     spotify
