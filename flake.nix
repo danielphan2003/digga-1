@@ -6,7 +6,7 @@
       # Once desired, bump master's locked revision:
       # nix flake update --update-input master
       master.url = "nixpkgs/master";
-      nixos.url = "nixpkgs/master";
+      nixos.url = "nixpkgs/nixos-unstable";
       home.url = "github:nix-community/home-manager/master";
       flake-utils.url = "github:numtide/flake-utils/flatten-tree-system";
       devshell.url = "github:numtide/devshell";
@@ -48,9 +48,9 @@
               inherit lib pkgset utils externModules system;
             });
 
-          homeConfigurations = 
-            builtins.mapAttrs 
-              (_: config: config.config.home-manager.users) 
+          homeConfigurations =
+            builtins.mapAttrs
+              (_: config: config.config.home-manager.users)
               self.nixosConfigurations;
 
           overlay = import ./pkgs;
@@ -82,9 +82,9 @@
               });
           in
           {
-            packages = packages // 
-              utils.genHomeActivationPackages 
-                self.homeConfigurations; 
+            packages = packages //
+              utils.genHomeActivationPackages
+                self.homeConfigurations;
 
             devShell = import ./shell.nix {
               inherit pkgs;

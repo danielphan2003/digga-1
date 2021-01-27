@@ -16,7 +16,7 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "giara";
-  version = "0.2";
+  version = "0.3";
 
   format = "other";
 
@@ -25,7 +25,7 @@ python3.pkgs.buildPythonApplication rec {
     owner = "World";
     repo = pname;
     rev = version;
-    sha256 = "1ca7ldf0rd19aixbdjvamqs55f3iig9wahgczik24r6knxj1bxl4";
+    sha256 = "004qmkfrgd37axv0b6hfh6v7nx4pvy987k5yv4bmlmkj9sbqm6f9";
   };
 
   nativeBuildInputs = [

@@ -25,7 +25,6 @@ in {
     java.enable = true;
     zsh.enable = true;
     adb.enable = true;
-    # plotinus.enable = true;
   };
 }
 

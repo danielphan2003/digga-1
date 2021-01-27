@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     universal-ctags
     ctagsWrapped.ctagsWrapped
-    nix-prefetch-github
+    nix-prefetch-git
     gradle
     unrar
     mercurial
