@@ -6,4 +6,7 @@ final: prev: {
   brlaser = prev.callPackage ./brlaser { };
   giara = prev.callPackage ./giara { };
   spacevim = prev.callPackage ./spacevim { };
+  notorious = prev.callPackage ./notorious { };
+  ripcord = prev.qt5.callPackage ./ripcord { };
+  # fractal = prev.callPackage ./fractal-unstable { };
 }

@@ -6,7 +6,7 @@
     layout = "us";
     # xkbOptions = "eurosign:e";
 
-    displayManager.gdm.wayland = false;
+    displayManager.gdm.wayland = true;
 
     # Enable touchpad support.
     libinput.enable = false;

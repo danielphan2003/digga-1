@@ -3,6 +3,7 @@
 , ripgrep
 , git
 , fzf
+, python3
 , makeWrapper
 , vim
 , neovim
@@ -36,6 +37,13 @@ let
     sha256 = "1k963y16cixaqp7vrim68hg4km20mmf7x5nwfblj27f4vzyb5l2m";
   };
 
+  customPython = python3.withPackages (ps: with ps; [
+    pynvim
+    rope
+    jedi
+    pylint
+  ]);
+
 in
 mkDerivation rec {
   pname = "spacevim";
@@ -64,7 +72,7 @@ mkDerivation rec {
     # trailing slash very important for SPACEVIMDIR
     makeWrapper "${vim-customized}/bin/nvim" "$out/bin/spacevim" \
         --add-flags "-u $out/SpaceVim/vimrc" --set SPACEVIMDIR "${spacevimDir}/" \
-        --prefix PATH : ${lib.makeBinPath [ fzf git ripgrep ]}
+        --prefix PATH : ${lib.makeBinPath [ fzf git ripgrep customPython ]}
 
     ln -s $out/bin/spacevim $out/bin/vim
   '';

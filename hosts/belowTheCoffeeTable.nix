@@ -1,4 +1,4 @@
-{ modulesPath, mapProfiles, lib, config, pkgs, ... }:
+{ modulesPath, lib, config, pkgs, ... }:
 let
   enabledProfiles = [
     "bluetooth"
@@ -7,9 +7,9 @@ let
     "gnome"
     "graphical"
     "printing"
-    "pulse"
-    "usb"
+    "sound"
     "xorg"
+    "usb"
     "nix-builder"
   ];
 in {
@@ -35,14 +35,14 @@ in {
     # broken sensor.iio.enable = true;
   };
 
-  ## BootLoader configuration 
+  ## BootLoader configuration
   boot.loader.grub = {
     configurationLimit = 4;
     efiInstallAsRemovable = true;
     efiSupport = true;
     devices = [ "nodev" ];
   };
-  
+
   system.stateVersion = "20.09";
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
@@ -51,15 +51,15 @@ in {
   boot.extraModulePackages = [ ];
 
   fileSystems = {
-    "/" = { 
+    "/" = {
       device = "/dev/disk/by-uuid/6d795dbd-db0a-4852-a05e-d292bddb492e";
       fsType = "ext4";
     };
-    "/boot" = { 
+    "/boot" = {
       device = "/dev/sda1";
       fsType = "vfat";
     };
-    "/home/pachums" = { 
+    "/home/pachums" = {
       device = "/dev/sda2";
       fsType = "ext4";
     };

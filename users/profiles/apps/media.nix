@@ -10,6 +10,7 @@
     vlc
     gnome3.cheese
     gnome3.eog
+    peek
     krita
     inkscape
     newsflash

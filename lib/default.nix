@@ -67,10 +67,6 @@ in
 
   modules =
     let
-      # binary cache
-      cachix = import ../cachix.nix;
-      cachixAttrs = { inherit cachix; };
-
       # modules
       moduleList = import ../modules/list.nix;
       modulesAttrs = pathsToImportedAttrs moduleList;
@@ -79,13 +75,11 @@ in
       profilesList = import ../profiles/list.nix;
       profilesAttrs = { profiles = pathsToImportedAttrs profilesList; };
     in
-    recursiveUpdate
-      (recursiveUpdate cachixAttrs modulesAttrs)
-      profilesAttrs;
+    recursiveUpdate modulesAttrs profilesAttrs;
 
   genHomeActivationPackages = hmConfigs:
-    { hmActivationPackages = 
-        builtins.mapAttrs (_: x: builtins.mapAttrs 
+    { hmActivationPackages =
+        builtins.mapAttrs (_: x: builtins.mapAttrs
         (_: cfg: cfg.home.activationPackage) x) hmConfigs;
     };
 

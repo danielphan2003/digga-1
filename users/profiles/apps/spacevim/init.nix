@@ -34,7 +34,7 @@
     { name = "lang#html"; }
   ];
   options = {
-    autocomplete_method = "deoplete";
+    # autocomplete_method = "coc";
     buffer_index_type = 4;
     colorscheme = "gruvbox";
     colorscheme_bg = "dark";

@@ -10,7 +10,7 @@
 , ...
 }:
 let
-  inherit (utils) recImport mapProfiles;
+  inherit (utils) recImport;
   inherit (builtins) attrValues removeAttrs;
   inherit (pkgset) osPkgs unstablePkgs;
 
@@ -23,7 +23,6 @@ let
 
       specialArgs =
         {
-          inherit mapProfiles;
           unstableModulesPath = "${master}/nixos/modules";
         };
 

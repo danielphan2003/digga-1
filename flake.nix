@@ -21,7 +21,7 @@
       inherit (utils) pathsToImportedAttrs genPkgset overlayPaths modules
         genPackages pkgImport;
 
-      utils = import ./lib/utils.nix { inherit lib; };
+      utils = import ./lib { inherit lib; };
 
       externOverlays = [ nur.overlay devshell.overlay ];
       externModules = [ home.nixosModules.home-manager ];
