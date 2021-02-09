@@ -4,11 +4,14 @@
 
   imports = [ # Include the results of the hardware scan.
     "${modulesPath}/installer/scan/not-detected.nix"
-    (import ../users/pachums ["clifull" "apps"])
-    ../users/root
-    suites.graphics
-    suites.core
-  ];
+  ] ++ lib.lists.flatten (with suites; [
+    core
+    gnome
+    graphics
+    develop
+    sensors
+    boot
+  ]);
 
   users.mutableUsers = false;
 
