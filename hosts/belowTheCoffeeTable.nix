@@ -8,7 +8,7 @@
     ../users/root
     suites.graphics
     suites.core
-  ]
+  ];
 
   users.mutableUsers = false;
 
