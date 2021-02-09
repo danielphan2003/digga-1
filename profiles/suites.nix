@@ -1,24 +1,25 @@
-{ lib, profiles }:
+{ lib }:
 let
   inherit (builtins) mapAttrs isFunction;
+  inherit (lib.flk) importDefaults;
+
+  profiles = importDefaults (toString ../profiles);
+  users = importDefaults (toString ../users);
 
   allProfiles =
     let
-      filtered = lib.filterAttrs (n: _: n != "core") profiles;
+      sansCore = lib.filterAttrs (n: _: n != "core") profiles;
     in
-    lib.collect isFunction filtered;
+    lib.collect isFunction sansCore;
 
   allUsers = lib.collect isFunction users;
 
-  users = lib.flk.defaultImports (toString ../users);
-in
-with profiles;
-mapAttrs (_: v: lib.flk.profileMap v)
-  # define your own suites below
-  rec {
+
+  suites = with profiles; rec {
     core = [ users.nixos users.root ];
-    desktop = [ bluetooth gnome graphical
-                  printing sound usb xorg ];
-  } // {
+    desktop = [ bluetooth gnome graphical printing sound usb xorg ];
+  };
+in
+mapAttrs (_: v: lib.flk.profileMap v) suites // {
   inherit allProfiles allUsers;
 }
