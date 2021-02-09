@@ -4,14 +4,7 @@
 
   imports = [ # Include the results of the hardware scan.
     "${modulesPath}/installer/scan/not-detected.nix"
-  ] ++ lib.lists.flatten (with suites; [
-    core
-    gnome
-    graphics
-    develop
-    sensors
-    boot
-  ]);
+  ] ++ suites.desktop;
 
   users.mutableUsers = false;
 
