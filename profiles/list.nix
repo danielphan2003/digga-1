@@ -1,0 +1,12 @@
+[
+  ./core
+  ./develop.nix
+  ./graphical.nix
+  ./xorg.nix
+  ./pulse.nix
+  ./printing.nix
+  ./efi-grub.nix
+  ./bluetooth.nix
+  ./usb.nix
+  ./gnome.nix
+]

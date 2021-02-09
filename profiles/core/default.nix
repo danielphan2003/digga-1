@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 let inherit (lib) fileContents;
+
 in
 {
   nix.package = pkgs.nixFlakes;
@@ -26,7 +27,6 @@ in
       moreutils
       nmap
       ripgrep
-      tealdeer
       utillinux
       whois
     ];
@@ -65,15 +65,12 @@ in
         nr = "np remove";
         ns = "n search --no-update-lock-file";
         nf = "n flake";
-        nepl = "n repl '<nixos>'";
+        nepl = "n repl '<nixpkgs>'";
         srch = "ns nixpkgs";
         nrb = ifSudo "sudo nixos-rebuild";
         mn = ''
           manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix
         '';
-
-        # fix nixos-option
-        nixos-option = "nixos-option -I nixpkgs=${toString ../../compat}";
 
         # sudo
         s = ifSudo "sudo -E ";
@@ -128,6 +125,7 @@ in
       min-free = 536870912
       keep-outputs = true
       keep-derivations = true
+      builders-use-substitutes = true
     '';
 
   };

@@ -12,7 +12,7 @@ let
   inherit (lib.flk) recImport nixosSystemExtended defaultImports;
   inherit (builtins) attrValues removeAttrs;
 
-  suites = import ../suites { inherit lib; };
+  suites = import ../profiles/suites.nix { inherit lib; };
 
   config = hostName:
     nixosSystemExtended {
