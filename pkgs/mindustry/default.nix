@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, makeDesktopItem, libpulseaudio, makeWrapper, jdk, jre }:
+{ lib, stdenv, fetchurl, makeDesktopItem, libpulseaudio, makeWrapper, jdk, jre }:
 
 let
   desktopItem = makeDesktopItem {
@@ -29,14 +29,14 @@ in stdenv.mkDerivation rec {
 
     makeWrapper ${jre}/bin/java $out/bin/mindustry \
       --add-flags "-jar $out/share/mindustry/mindustry.jar" \
-      --prefix LD_LIBRARY_PATH : ${stdenv.lib.makeLibraryPath [ libpulseaudio ]}
-      
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ libpulseaudio ]}
+
     cp $src $out/share/mindustry/mindustry.jar
     cp -r ${desktopItem}/share/applications $out/share
     install -D icons/icon_64.png $out/share/icons/hicolor/32x32/apps/mindustry.png
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A sandbox tower defense game";
     homepage = https://mindustrygame.github.io/;
     maintainers = with maintainers; [ pacman99 ];

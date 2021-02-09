@@ -1,6 +1,7 @@
-{ stdenv
+{ lib
+, stdenv
 , fetchurl
-, autoPatchelfHook 
+, autoPatchelfHook
 , makeWrapper
 }:
 
@@ -13,8 +14,8 @@ stdenv.mkDerivation rec {
     sha256 = "0ibg92i5yzxph2z9wdf9mcd5l1713f7r7ibh766pl8ijkfwvcmii";
   };
 
-  nativeBuildInputs = [ 
-    autoPatchelfHook 
+  nativeBuildInputs = [
+    autoPatchelfHook
     makeWrapper
   ];
 
@@ -29,7 +30,7 @@ stdenv.mkDerivation rec {
     makeWrapper $out/opt/ventoy/Ventoy2Disk.sh $out/bin/ventoy
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "An open source tool to create bootable USB drive for ISO files";
     homepage = "https://ventoy.net";
     license = licenses.gpl3;

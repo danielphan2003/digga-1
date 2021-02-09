@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, cups, ghostscript }:
+{ lib, stdenv, fetchurl, cups, ghostscript }:
 
 stdenv.mkDerivation rec {
   pname = "cups-pdf";
@@ -53,7 +53,7 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A virtual PDF printer for CUPS";
     homepage = https://www.cups-pdf.de;
     license = licenses.gpl2;
