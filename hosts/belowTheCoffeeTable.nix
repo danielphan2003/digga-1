@@ -14,6 +14,11 @@
   networking.hostName = "belowTheCoffeeTable"; # Define your hostname.
   networking.networkmanager.enable = true;
 
+  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "America/Los_Angeles";
+  time.hardwareClockInLocalTime = true;
+
+
   ## Hardware
   hardware = {
     cpu.intel.updateMicrocode = true;
