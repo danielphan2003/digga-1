@@ -16,12 +16,12 @@ let
 
 
   suites = with profiles; rec {
+    core = [ users.root users.pachums usb ];
     boot = [ efi-grub ];
-    core = [ users.root users.pachums usb ] ++ boot;
     graphics = [ printing xorg graphical gnome ];
     develop = [ shell nix-builder ];
     sensors = [ location bluetooth sound ];
-    desktop = core ++ graphics ++ develop ++ sensors;
+    desktop = core ++ boot ++ graphics ++ develop ++ sensors;
   };
 in
 mapAttrs (_: v: lib.flk.profileMap v) suites // {
