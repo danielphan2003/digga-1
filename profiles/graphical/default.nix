@@ -10,5 +10,7 @@
   };
   environment.systemPackages = [ pkgs.virtualgl ];
 
+  systemd.packages = [ pkgs.deadd-notification-center ];
+
   services.flatpak.enable = true;
 }
