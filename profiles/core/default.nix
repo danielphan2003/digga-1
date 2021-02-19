@@ -138,11 +138,7 @@ in
       min-free = 536870912
       keep-outputs = true
       keep-derivations = true
-<<<<<<< HEAD
-      builders-use-substitutes = true
-=======
       fallback = true
->>>>>>> upstream/core
     '';
 
   };
