@@ -13,6 +13,7 @@ in
       binutils
       coreutils
       curl
+      deploy-rs
       direnv
       dnsutils
       dosfstools
@@ -23,8 +24,8 @@ in
       iputils
       jq
       manix
-      nix-index
       moreutils
+      nix-index
       nmap
       ripgrep
       utillinux
@@ -66,7 +67,7 @@ in
         ns = "n search --no-update-lock-file";
         nf = "n flake";
         nepl = "n repl '<nixpkgs>'";
-        srch = "ns nixpkgs";
+        srch = "nsni";
         nrb = ifSudo "sudo nixos-rebuild";
         mn = ''
           manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | sk --preview="manix '{}'" | xargs manix
@@ -90,7 +91,20 @@ in
         dn = ifSudo "s systemctl stop";
         jtl = "journalctl";
 
-      };
+      } // lib.mapAttrs'
+        (n: v:
+          let
+            prefix = lib.concatStrings (lib.take 2 (lib.stringToCharacters n));
+            ref = from:
+              if from ? ref
+              then "ns ${from.id}/${from.ref}"
+              else "ns ${from.id}";
+          in
+          lib.nameValuePair
+            "ns${prefix}"
+            (ref v.from)
+        )
+        config.nix.registry;
 
   };
 
@@ -121,11 +135,14 @@ in
     trustedUsers = [ "root" "@wheel" ];
 
     extraOptions = ''
-      experimental-features = nix-command flakes ca-references
       min-free = 536870912
       keep-outputs = true
       keep-derivations = true
+<<<<<<< HEAD
       builders-use-substitutes = true
+=======
+      fallback = true
+>>>>>>> upstream/core
     '';
 
   };
@@ -138,8 +155,6 @@ in
       eval "$(${pkgs.direnv}/bin/direnv hook bash)"
     '';
   };
-
-  security.hideProcessInformation = true;
 
   services.earlyoom.enable = true;
 

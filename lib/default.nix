@@ -43,6 +43,21 @@ let
     map fullPath (attrNames (readDir overlayDir));
 
   /**
+  Synopsis: mkNodes _nixosConfigurations_
+
+  Generate the `nodes` attribute expected by deploy-rs
+  where _nixosConfigurations_ are `nodes`.
+  **/
+  mkNodes = deploy: mapAttrs (_: config: {
+    hostname = config.config.networking.hostName;
+
+    profiles.system = {
+      user = "root";
+      path = deploy.lib.x86_64-linux.activate.nixos config;
+    };
+  });
+
+  /**
   Synopsis: importDefaults _path_
 
   Recursively import the subdirs of _path_ containing a default.nix.
@@ -72,28 +87,28 @@ let
 in
 {
   inherit importDefaults mapFilterAttrs genAttrs' pkgImport
-    pathsToImportedAttrs;
+    pathsToImportedAttrs mkNodes;
 
   overlays = pathsToImportedAttrs overlayPaths;
 
   genPkgs = { self }:
     let inherit (self) inputs;
     in
-    (inputs.flake-utils.lib.eachDefaultSystem
+    (inputs.utils.lib.eachDefaultSystem
       (system:
         let
           extern = import ../extern { inherit inputs; };
-          unstable = pkgImport inputs.master [ ] system;
-          overrides = (import ../unstable).packages;
+          overridePkgs = pkgImport inputs.override [ ] system;
+          overridesOverlay = (import ../overrides).packages;
 
           overlays = [
-            (overrides unstable)
+            (overridesOverlay overridePkgs)
             self.overlay
             (final: prev: {
               lib = (prev.lib or { }) // {
                 inherit (nixos.lib) nixosSystem;
                 flk = self.lib;
-                utils = inputs.flake-utils.lib;
+                utils = inputs.utils.lib;
               };
             })
           ]
@@ -173,7 +188,7 @@ in
       cachixAttrs = { inherit cachix; };
 
       # modules
-      moduleList = import ../modules/list.nix;
+      moduleList = import ../modules/module-list.nix;
       modulesAttrs = pathsToImportedAttrs moduleList;
 
     in

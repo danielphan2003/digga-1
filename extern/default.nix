@@ -8,11 +8,14 @@
   overlays = [
     nur.overlay
     devshell.overlay
+    (final: prev: {
+      deploy-rs = deploy.packages.${prev.system}.deploy-rs;
+    })
   ];
 
   # passed to all nixos modules
   specialArgs = {
-    unstableModulesPath = "${master}/nixos/modules";
+    overrideModulesPath = "${override}/nixos/modules";
     hardware = nixos-hardware.nixosModules;
   };
 }
