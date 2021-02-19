@@ -15,8 +15,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "phuhl";
     repo = "linux_notification_center";
-    rev = "6fc61c3cd3c1dd8be57fd6f8f51f14dbb0006089";
-    sha256 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    rev = version;
+    sha256 = "QaOLrtlhQyhMOirk6JO1yMGRrgycHmF9FAdKNbN2TRk=";
   };
 
   nativeBuildInputs = [
