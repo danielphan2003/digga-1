@@ -108,6 +108,22 @@
         "type": "github"
       }
     },
+    "mobile-nixos": {
+      "locked": {
+        "lastModified": 1612424015,
+        "narHash": "sha256-fDnu19Vux01DbTZ4jfHf/Xpp+uqMqoaW7Nmkeg9wCaw=",
+        "owner": "archseer",
+        "repo": "mobile-nixos",
+        "rev": "6b4c49cdcb114b3a5c59a90cbda27f7712cbef7f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "archseer",
+        "ref": "flake-pr",
+        "repo": "mobile-nixos",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -207,6 +223,7 @@
         "devshell": "devshell",
         "flake-compat": "flake-compat",
         "home": "home",
+        "mobile-nixos": "mobile-nixos",
         "naersk": "naersk",
         "nixos": "nixos",
         "nixos-hardware": "nixos-hardware",

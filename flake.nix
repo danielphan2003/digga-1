@@ -23,6 +23,7 @@
       naersk.inputs.nixpkgs.follows = "override";
       flake-compat.url = "github:edolstra/flake-compat";
       flake-compat.flake = false;
+      mobile-nixos.url = "github:archseer/mobile-nixos/flake-pr";
     };
 
   outputs =

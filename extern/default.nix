@@ -3,6 +3,7 @@
   modules = [
     home.nixosModules.home-manager
     ci-agent.nixosModules.agent-profile
+    mobile-nixos.nixosModules.pine64-pinephone
   ];
 
   overlays = [
