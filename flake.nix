@@ -43,8 +43,8 @@
     let
       inherit (utils.lib) eachDefaultSystem flattenTreeSystem;
       inherit (nixos.lib) recursiveUpdate;
-      inherit (self.lib) overlays nixosModules genPackages genPkgs
-        genHomeActivationPackages mkNodes;
+      inherit (self.lib) overlays nixosModules homeModules
+        genPackages genPkgs genHomeActivationPackages mkNodes;
 
       extern = import ./extern { inherit inputs; };
 
@@ -56,7 +56,7 @@
           pkgs = pkgs'.${system};
         in
         {
-          inherit nixosModules overlays;
+          inherit nixosModules homeModules overlays;
 
           nixosConfigurations =
             import ./hosts (recursiveUpdate inputs {
