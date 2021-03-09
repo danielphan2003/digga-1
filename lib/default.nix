@@ -199,6 +199,9 @@ in
     in
     recursiveUpdate cachixAttrs modulesAttrs;
 
+  homeModules = pathsToImportedAttrs
+    (import ../users/modules/module-list.nix);
+
   genHomeActivationPackages = { self }:
     let hmConfigs =
       builtins.mapAttrs

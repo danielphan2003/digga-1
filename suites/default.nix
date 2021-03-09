@@ -5,6 +5,7 @@ let
 
   profiles = mkProfileAttrs (toString ../profiles);
   users = mkProfileAttrs (toString ../users);
+  userProfiles = mkProfileAttrs (toString ../users/profiles);
 
   allProfiles =
     let defaults = lib.collect (x: x ? default) profiles;
@@ -23,7 +24,17 @@ let
     sensors = [ location bluetooth sound ];
     desktop = base ++ boot ++ graphics ++ develop ++ sensors;
   };
+
+  userSuites = with userProfiles; rec {
+    base = [ direnv git ];
+  };
+
 in
-mapAttrs (_: v: profileMap v) suites // {
-  inherit allProfiles allUsers;
+{
+  system = mapAttrs (_: v: profileMap v) suites // {
+    inherit allProfiles allUsers;
+  };
+  user = mapAttrs (_: v: profileMap v) userSuites // {
+    allProfiles = userProfiles;
+  };
 }

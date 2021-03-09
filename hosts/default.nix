@@ -19,7 +19,7 @@ let
     nixosSystemExtended {
       inherit system;
 
-      specialArgs = extern.specialArgs // { inherit suites; };
+      specialArgs = extern.specialArgs // { suites = suites.system; };
 
       modules =
         let
@@ -37,10 +37,17 @@ let
                 modules;
             };
 
-          global = {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+          user = {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
 
+              extraSpecialArgs = extern.userSpecialArgs // { suites = suites.user; };
+              sharedModules = extern.userModules ++ (attrValues self.homeModules);
+            };
+          };
+
+          global = {
             hardware.enableRedistributableFirmware = lib.mkDefault true;
 
             networking.hostName = hostName;
@@ -75,6 +82,7 @@ let
           core
           global
           local
+          user
           modOverrides
         ] ++ extern.modules;
 
