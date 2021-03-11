@@ -5,8 +5,8 @@
     enable = true;
     serverAliveInterval = 20;
     matchBlocks = {
-      home = {
-        hostname = "cloud.myrdd.info";
+      myrdd = {
+        hostname = "myrdd.info";
         port = 4422;
       };
       anju = {
