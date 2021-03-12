@@ -182,7 +182,7 @@ in
             (args // {
               modules = modules ++ [
                 ({ ... }: {
-                  home-manager.useUserPackages = mkForce true;
+                  home-manager.useUserPackages = mkForce false;
                 })
               ];
             })).config;
@@ -215,7 +215,7 @@ in
   genHomeActivationPackages = { self }:
     let hmConfigs =
       builtins.mapAttrs
-        (_: config: config.system.build.home.users)
+        (_: config: config.config.system.build.home.users)
         self.nixosConfigurations;
     in
     mapAttrs
