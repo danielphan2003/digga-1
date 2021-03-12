@@ -14,7 +14,6 @@
     rustup
 
     vscode
-    partition-manager
     gparted
     unetbootin
 

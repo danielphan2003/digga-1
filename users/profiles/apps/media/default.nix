@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     giara
-    gnome-podcasts
+    # gnome-podcasts
     spotify-tui
     spotify
     gimp
@@ -19,7 +19,6 @@
     ncspot
     (kodi.override {
       plugins = with pkgs.kodiPlugins; [
-        advanced-launcher
         pvr-hts
       ];
     })
