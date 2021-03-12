@@ -8,8 +8,7 @@
     home = "/home/pachums";
   };
 
-  home-manager.users.pachums = { suites, ... }: {
-    imports = suites.cli ++ suites.graphical;
+  home-manager.users.pachums = {
     programs.home-manager.enable = true;
     home.stateVersion = config.system.stateVersion;
   };

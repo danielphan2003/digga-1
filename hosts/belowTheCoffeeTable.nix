@@ -6,6 +6,10 @@
     "${modulesPath}/installer/scan/not-detected.nix"
   ] ++ suites.desktop;
 
+  home-manager.users.pachums = { suites, ... }: {
+    imports = suites.cli ++ suites.graphical;
+  };
+
   users.mutableUsers = false;
 
   services.xserver.videoDrivers = [ "intel" ];
