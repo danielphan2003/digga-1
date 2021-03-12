@@ -40,7 +40,6 @@ let
           user = {
             home-manager = {
               useGlobalPkgs = true;
-              useUserPackages = true;
 
               extraSpecialArgs = extern.userSpecialArgs // { suites = suites.user; };
               sharedModules = extern.userModules ++ (attrValues self.homeModules);
