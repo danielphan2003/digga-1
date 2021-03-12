@@ -53,6 +53,10 @@ let
 
             nixpkgs = { inherit pkgs; };
 
+            nix.registry = {
+              devos.flake = self;
+            };
+
             system.configurationRevision = lib.mkIf (self ? rev) self.rev;
           };
 
