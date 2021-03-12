@@ -30,7 +30,7 @@ let
       ssh
       zsh
       spacevim
-      clibase
+      clicore
     ];
 
     clifull = with apps; [
