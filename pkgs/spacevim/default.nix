@@ -32,10 +32,10 @@ let
     ln -s ${spacevimConfig} $out/init.toml
   '';
 
-  helptagsPatch = fetchurl {
-    url = "https://github.com/NixOS/nixpkgs/raw/master/pkgs/applications/editors/spacevim/helptags.patch";
-    sha256 = "1k963y16cixaqp7vrim68hg4km20mmf7x5nwfblj27f4vzyb5l2m";
-  };
+  # helptagsPatch = fetchurl {
+  #   url = "https://github.com/NixOS/nixpkgs/raw/master/pkgs/applications/editors/spacevim/helptags.patch";
+  #   sha256 = "1k963y16cixaqp7vrim68hg4km20mmf7x5nwfblj27f4vzyb5l2m";
+  # };
 
   customPython = python3.withPackages (ps: with ps; [
     pynvim
@@ -64,7 +64,7 @@ mkDerivation rec {
     vim -u NONE -c "helptags $(pwd)/doc" -c q
   '';
 
-  patches = [ helptagsPatch ];
+  patches = [ ./helptags.patch ];
 
   installPhase = ''
     mkdir -p $out/bin
