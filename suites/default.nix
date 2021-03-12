@@ -1,29 +1,29 @@
 { lib }:
 let
   inherit (builtins) mapAttrs isFunction;
-  inherit (lib.flk) importDefaults;
+  inherit (lib.flk) mkProfileAttrs profileMap;
 
-  profiles = importDefaults (toString ../profiles);
-  users = importDefaults (toString ../users);
+  profiles = mkProfileAttrs (toString ../profiles);
+  users = mkProfileAttrs (toString ../users);
 
   allProfiles =
-    let
-      sansCore = lib.filterAttrs (n: _: n != "core") profiles;
-    in
-    lib.collect isFunction sansCore;
+    let defaults = lib.collect (x: x ? default) profiles;
+    in map (x: x.default) defaults;
 
-  allUsers = lib.collect isFunction users;
+  allUsers =
+    let defaults = lib.collect (x: x ? default) users;
+    in map (x: x.default) defaults;
 
 
   suites = with profiles; rec {
-    core = [ users.root users.pachums usb ];
+    base = [ users.root users.pachums usb ];
     boot = [ efi-grub ];
     graphics = [ printing xorg graphical gnome ];
     develop = [ shell nix-builder ];
     sensors = [ location bluetooth sound ];
-    desktop = core ++ boot ++ graphics ++ develop ++ sensors;
+    desktop = base ++ boot ++ graphics ++ develop ++ sensors;
   };
 in
-mapAttrs (_: v: lib.flk.profileMap v) suites // {
+mapAttrs (_: v: profileMap v) suites // {
   inherit allProfiles allUsers;
 }

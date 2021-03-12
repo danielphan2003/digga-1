@@ -12,26 +12,40 @@
 # Introduction
 DevOS grants a simple way to use, deploy and manage [NixOS][nixos] systems for
 personal and productive use. It does this by providing a convenient repository
-structure; integrating several popular projects like
-[home-manager][home-manager], and [devshell][devshell].
+structure, integrating several popular projects like
+[home-manager][home-manager], and [devshell][devshell], and offering useful
+conveniences like
+[automatic source updates](./pkgs#automatic-source-updates).
 
 Skip the indeterminate nature of other systems, _and_ the perceived difficulty
 of Nix. It's easier than you think!
 
-A lot will change toward 1.0.0[#121](https://github.com/divnix/devos/issues/121)
-, so stayed tuned!
+### Status
+Alpha. A lot of the implementation is less than perfect, and huge redesigns
+_will_ happen. There are unstable versions (0._x_._x_) to help users keep
+track of changes and progress.
 
 ## Getting Started
 Check out the [guide](https://devos.divnix.com/doc/start) to get up and running.
 
+## In the Wild
+The author maintains his own branch, so you can take inspiration, direction, or
+make critical comments about the [code][please]. 😜
+
 ## Motivation
 NixOS provides an amazing abstraction to manage our environment, but that new
 power can sometimes bring feelings of overwhelm and confusion. Having a turing
-complete programming language can add an unlimited potential for complexity if
-we do it wrong. Instead, we should have a community consensus on how to manage
-a NixOS system — consider this a first attempt.
+complete system can easily lead to unlimited complexity if we do it wrong.
+Instead, we should have a community consensus on how to manage a NixOS system.
+Help us reach that goal!
 
 ___The future is declarative! 🎉___
+
+## Upstream
+I'd love to see this in the nix-community should anyone believe its reached a
+point of maturity to be generally useful, but I'm all for waiting until
+1.0[#121](https://github.com/divnix/devos/issues/121) to save the cache work,
+too.
 
 ## Community Profiles
 There are two branches from which to choose: [core][core] and
@@ -63,3 +77,4 @@ DevOS is licensed under the [MIT License][mit].
 [community]: https://github.com/divnix/devos/tree/community
 [dotfiles]: https://github.com/hlissner/dotfiles
 [devshell]: https://github.com/numtide/devshell
+[please]: https://github.com/nrdxp/devos/tree/nrd

@@ -8,6 +8,7 @@
   - [Cachix](./cachix/README.md)
   - [Extern](./extern/README.md)
   - [Hosts](./hosts/README.md)
+  - [Lib](./lib/README.md)
   - [Modules](./modules/README.md)
   - [Overlays](./overlays/README.md)
   - [Overrides](./overrides/README.md)
@@ -25,4 +26,5 @@
   - [home](./doc/flk/home.md)
 - [Integrations](doc/integrations/index.md)
   - [deploy-rs](./doc/integrations/deploy.md)
+  - [hercules-ci](./doc/integrations/hercules.md)
 - [Contributing](./doc/README.md)
