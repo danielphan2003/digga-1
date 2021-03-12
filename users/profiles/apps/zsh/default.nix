@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -19,41 +23,32 @@
         android-unmount = "nix-shell -p libmtp jmtpfs --run fusermount -u";
         ducks = "du -hsx * | sort -rh | head -10";
       };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "sudo" ];
-        theme = "dst";
-      };
-      plugins = let files = import ./zshPlugins/generated.nix pkgs;
-      in [
+      plugins = with import ./zshPlugins/generated.nix pkgs;
+      [
         {
-  	name = "z";
-  	file = "z.sh";
-  	src = files.z;
+  	      name = "z";
+  	      file = "z.sh";
+  	      src = z;
         }
         {
-  	name = "zsh-bd";
-  	src = files.zsh-bd;
+  	      name = "zsh-bd";
+  	      src = zsh-bd;
         }
         {
-  	name = "zsh-autosuggestions";
-  	src = files.zsh-autosuggestions;
+  	      name = "zsh-autosuggestions";
+  	      src = zsh-autosuggestions;
         }
         {
-  	name = "zsh-history-substring-search";
-  	src = files.zsh-history-substring-search;
+  	      name = "zsh-history-substring-search";
+  	      src = zsh-history-substring-search;
         }
         {
-  	name = "zsh-completions";
-  	src = files.zsh-completions;
-        }
-        { 
-  	name = "zsh-syntax-highlighting";
-  	src = files.zsh-syntax-highlighting;
+  	      name = "zsh-completions";
+  	      src = zsh-completions;
         }
         {
-  	name = "zsh-dwim";
-  	src = files.zsh-dwim;
+          name = "zsh-syntax-highlighting";
+  	      src = zsh-syntax-highlighting;
         }
       ];
     };

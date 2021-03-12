@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-cd .config/nixpkgs/zshPlugins
 printf "pkgs:\n{\n" > generated.nix
 while read line; do
   printf "$(echo $line | awk '{print $2}') = " >> generated.nix
