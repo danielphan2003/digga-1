@@ -12,8 +12,6 @@
     ctagsWrapped.ctagsWrapped
     universal-ctags
     rustup
-
-    vscode
     gparted
     unetbootin
 

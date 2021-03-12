@@ -26,14 +26,17 @@ let
   };
 
   userSuites = with userProfiles; rec {
-    cli = with apps; [
+    clibase = with apps; [
       ssh
       zsh
       spacevim
       clibase
+    ];
+
+    clifull = with apps; [
       clitools
       development
-    ];
+    ] ++ clibase;
 
     graphical = with apps; [
       appearance

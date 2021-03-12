@@ -7,7 +7,7 @@
   ] ++ suites.desktop;
 
   home-manager.users.pachums = { suites, ... }: {
-    imports = suites.cli ++ suites.graphical;
+    imports = with suites; clifull ++ graphical;
   };
 
   users.mutableUsers = false;
