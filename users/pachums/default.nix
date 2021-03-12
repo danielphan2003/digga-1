@@ -1,9 +1,5 @@
-{ mapProfiles, config, pkgs, lib, ... }:
-let
-  enabledProfiles = ["clifull" "apps"];
-
-in {
-
+{ config, pkgs, lib, ... }:
+{
   users.users.pachums = {
     hashedPassword = lib.fileContents ../../secrets/userPass;
     isNormalUser = true;
@@ -12,9 +8,8 @@ in {
     home = "/home/pachums";
   };
 
-  home-manager.users.pachums = { ... }: {
-    imports = lib.lists.flatten
-      (map (x: import (./. + "/../profiles/${x}.nix")) enabledProfiles);
+  home-manager.users.pachums = { suites, ... }: {
+    imports = suites.cli ++ suites.graphical;
     programs.home-manager.enable = true;
     home.stateVersion = config.system.stateVersion;
   };

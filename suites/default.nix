@@ -26,7 +26,27 @@ let
   };
 
   userSuites = with userProfiles; rec {
-    base = [ direnv git ];
+    cli = with apps; [
+      ssh
+      zsh
+      spacevim
+      gcalcli
+      clibase
+      clitools
+      development
+    ];
+
+    graphical = with apps; [
+      appearance
+      firefox
+      comms
+      office
+      media
+      gaming
+      gnome-extensions
+      services.spotifyd
+    ];
+
   };
 
 in
