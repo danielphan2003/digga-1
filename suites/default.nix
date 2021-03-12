@@ -30,7 +30,6 @@ let
       ssh
       zsh
       spacevim
-      gcalcli
       clibase
       clitools
       development
