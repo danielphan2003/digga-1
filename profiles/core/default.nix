@@ -3,7 +3,7 @@ let inherit (lib) fileContents;
 
 in
 {
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.nixUnstable;
 
   nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 
@@ -122,6 +122,7 @@ in
     trustedUsers = [ "root" "@wheel" ];
 
     extraOptions = ''
+      experimental-features = nix-command flakes ca-references
       min-free = 536870912
       keep-outputs = true
       keep-derivations = true

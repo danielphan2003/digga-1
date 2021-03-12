@@ -13,7 +13,7 @@
       element-desktop
       manix
       nixpkgs-fmt
-      nixFlakes
+      nixUnstable
       qutebrowser
       signal-desktop
       starship;
