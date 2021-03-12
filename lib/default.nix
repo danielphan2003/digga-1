@@ -177,11 +177,21 @@ in
                 })
               ];
             })).config;
+
+          hmConfig = (nixosSystem
+            (args // {
+              modules = modules ++ [
+                ({ ... }: {
+                  home-manager.useUserPackages = mkForce true;
+                })
+              ];
+            })).config;
         in
         modules ++ [{
           system.build = {
             iso = isoConfig.system.build.isoImage;
             ci = ciConfig.system.build.toplevel;
+            home = hmConfig.home-manager;
           };
         }];
     });
@@ -205,7 +215,7 @@ in
   genHomeActivationPackages = { self }:
     let hmConfigs =
       builtins.mapAttrs
-        (_: config: config.config.home-manager.users)
+        (_: config: config.system.build.home.users)
         self.nixosConfigurations;
     in
     mapAttrs

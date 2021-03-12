@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # gtk = {
@@ -12,7 +12,7 @@
 
   # Lets you add fonts to home.packages
   # Auto updates font cache
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = lib.mkForce true;
 
   # Fonts and Icons
   home.packages = with pkgs; [
