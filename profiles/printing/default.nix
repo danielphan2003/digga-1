@@ -5,11 +5,11 @@
     cups-pdf = {
       enable = true;
     };
-    drivers = with pkgs; [ hplipWithPlugin brlaser brgenml1lpr brgenml1cupswrapper ];
+    drivers = with pkgs; [ hplip brlaser brgenml1lpr brgenml1cupswrapper ];
   };
   hardware.sane = {
     enable = true;
-    extraBackends = [ pkgs.hplipWithPlugin ];
+    extraBackends = [ pkgs.hplip ];
   };
 
 }
