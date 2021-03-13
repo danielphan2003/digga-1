@@ -3,7 +3,7 @@
   imports = suites.base ;
 
   home-manager.users.pachums = { suites, ... }: {
-    imports = suites.clibase;
+    imports = suites.clifull;
   };
 
 }

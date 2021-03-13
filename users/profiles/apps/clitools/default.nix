@@ -20,6 +20,7 @@
     imagemagick
     playerctl
     appimage-run
+    gitAndTools.hub
     usbutils
     nix-review
     ddgr

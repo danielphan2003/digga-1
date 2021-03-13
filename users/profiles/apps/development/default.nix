@@ -8,9 +8,6 @@
     wasm-pack
     cargo-generate
     gradle
-    gitAndTools.hub
-    ctagsWrapped.ctagsWrapped
-    universal-ctags
     rustup
     gparted
     unetbootin
