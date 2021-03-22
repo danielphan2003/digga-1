@@ -43,9 +43,9 @@ let
 
     lib = import "${devos}/lib" { inherit self nixos inputs; };
 
-    # templates.flk.path = ./.;
-    # templates.flk.description = "flk template";
-    # defaultTemplate = self.templates.flk;
+    templates.flk.path = ./.;
+    templates.flk.description = "flk template";
+    defaultTemplate = self.templates.flk;
 
     deploy.nodes = os.mkNodes deploy self.nixosConfigurations;
   };
