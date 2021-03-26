@@ -32,18 +32,31 @@
       let
         lib = import ./lib { inherit self nixos inputs; };
         inherit (lib.os) importIfExists;
-      in
-      lib.mkFlake {
-        inherit self;
-        hosts = ./hosts;
-        packages = importIfExists ./pkgs;
-        suites = importIfExists ./suites;
-        extern = importIfExists ./extern;
-        overrides = importIfExists ./overrides;
-        overlays = ./overlays;
-        profiles = ./profiles;
-        userProfiles = ./users/profiles;
-        modules = importIfExists ./modules/module-list.nix;
-        userModules = importIfExists ./users/modules/module-list.nix;
-      };
+
+        out = lib.mkFlake {
+          inherit self;
+          hosts = ./hosts;
+          packages = importIfExists ./pkgs;
+          suites = importIfExists ./suites;
+          extern = importIfExists ./extern;
+          overrides = importIfExists ./overrides;
+          overlays = ./overlays;
+          profiles = ./profiles;
+          userProfiles = ./users/profiles;
+          modules = importIfExists ./modules/module-list.nix;
+          userModules = importIfExists ./users/modules/module-list.nix;
+        };
+
+      in nixos.lib.recursiveUpdate out {
+        defaultTemplate = self.templates.flk;
+        templates.flk.path = builtins.toPath self;
+        templates.flk.description = "flk template";
+        templates.mkdevos.path =
+          let
+            excludes = [ "lib" "tests" "cachix" "nix" "theme" ".github" "bors.toml" "cachix.nix" ];
+            filter = path: type: ! builtins.elem (baseNameOf path) excludes;
+          in
+            builtins.filterSource filter ../..;
+        templates.mkdevos.description = "for mkDevos usage";
+      }
 }

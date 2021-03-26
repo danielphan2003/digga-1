@@ -32,17 +32,6 @@ let
 
     lib = import "${devos}/lib" { inherit self nixos inputs; };
 
-    defaultTemplate = self.templates.flk;
-    templates.flk.path = builtins.toPath self;
-    templates.flk.description = "flk template";
-    templates.mkdevos.path =
-      let
-        excludes = [ "lib" "tests" "cachix" "nix" "theme" ".github" "bors.toml" "cachix.nix" ];
-        filter = path: type: ! builtins.elem (baseNameOf path) excludes;
-      in
-        builtins.filterSource filter ../..;
-    templates.mkdevos.description = "for mkDevos usage";
-
     deploy.nodes = os.mkNodes deploy self.nixosConfigurations;
   };
 
@@ -60,8 +49,7 @@ let
         nixos.lib.recursiveUpdate tests deployChecks;
 
       packages = utils.lib.flattenTreeSystem system
-        (os.mkPackages { inherit pkgs; })
-        // { devosOptionsDoc = cfg.genDoc pkgs; };
+        (os.mkPackages { inherit pkgs; });
 
       devShell = import "${devos}/shell" {
         inherit self pkgs system;
