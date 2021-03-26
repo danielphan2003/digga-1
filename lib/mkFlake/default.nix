@@ -10,7 +10,7 @@ let
 
   inherit (inputs) utils deploy;
 
-  cfg = (os.evalDevosArgs { inherit args; }).config;
+  cfg = (lib.evalFlakeArgs { inherit args; }).config;
 
   multiPkgs = os.mkPkgs { inherit (cfg) extern overrides; };
 

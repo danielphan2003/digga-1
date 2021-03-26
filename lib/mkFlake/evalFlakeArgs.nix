@@ -30,7 +30,7 @@ let
             check = builtins.isFunction;
             description = "Nixpkgs overlay";
           };
-          default = importIf "${self}/pkgs" (final: prev: {});
+          default = (final: prev: {});
           defaultText = "\${self}/pkgs";
           description = ''
             Overlay for custom packages that will be included in treewide 'pkgs'.
@@ -40,14 +40,14 @@ let
         };
         modules = mkOption {
           type = listOf anything;
-          default = importIf "${self}/modules/module-list.nix" [];
+          default = [];
           defaultText = "\${self}/modules/module-list.nix";
           apply = dev.pathsToImportedAttrs;
           description = "list of modules to include in confgurations";
         };
         userModules = mkOption {
           type = listOf anything;
-          default = importIf "${self}/users/modules/module-list.nix" [];
+          default = [];
           defaultText = "\${self}/users/modules/module-list.nix";
           apply = dev.pathsToImportedAttrs;
           description = "list of modules to include in home-manager configurations";
@@ -72,7 +72,7 @@ let
           in
           mkOption {
             type = inputAttrs;
-            default = importIf "${self}/suites" ({...}: defaults);
+            default = { ... }: defaults;
             defaultText = "\${self}/suites";
             apply = suites: defaults // os.mkSuites {
               inherit suites;
@@ -99,7 +99,7 @@ let
           in
           mkOption {
             type = inputAttrs;
-            default = importIf "${self}/extern" ({...}: defaults);
+            default = { ... }: defaults;
             defaultText = "\${self}/extern";
             # So unneeded extern attributes can safely be deleted
             apply = x: defaults // (x { inputs = inputs // self.inputs; });
@@ -116,17 +116,13 @@ let
           apply = x: dev.pathsToImportedAttrs (dev.pathsIn x);
           description = "path to folder containing overlays which will be applied to pkgs";
         };
-        overrides =
-          let
-            defaults = { modules = []; disabledModules = []; packages = _: _: _: {}; };
-          in
-          mkOption {
-            type = attrs;
-            default = importIf "${self}/overrides" defaults;
-            apply = x: defaults // x;
-            defaultText = "\${self}/overrides";
-            description = "attrset of packages and modules that will be pulled from nixpkgs master";
-          };
+        overrides = mkOption rec {
+          type = attrs;
+          default = { modules = []; disabledModules = []; packages = _: _: _: {}; };
+          apply = x: default // x;
+          defaultText = "\${self}/overrides";
+          description = "attrset of packages and modules that will be pulled from nixpkgs master";
+        };
         genDoc = mkOption {
           type = functionTo attrs;
           internal = true;

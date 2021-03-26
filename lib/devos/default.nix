@@ -7,8 +7,7 @@
       config = { allowUnfree = true; };
     };
 
-  importIf = path: fallback:
-    if builtins.pathExists path then import path else fallback;
+  importIfExists = path: lib.mkIf (builtins.pathExists path) (import path);
 
   profileMap = map (profile: profile.default);
 

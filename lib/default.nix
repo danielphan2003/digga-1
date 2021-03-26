@@ -17,7 +17,9 @@ lib.makeExtensible (final:
     lists = callLibs ./lists.nix;
     strings = callLibs ./strings.nix;
 
-    inherit (os) mkDevos;
+    mkFlake = callLibs ./mkFlake;
+    evalFlakeArgs = callLibs ./mkFlake/evalFlakeArgs.nix;
+
     inherit (attrs) mapFilterAttrs genAttrs' pathsToImportedAttrs concatAttrs;
     inherit (lists) pathsIn;
     inherit (strings) rgxToString;

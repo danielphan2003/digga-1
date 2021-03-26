@@ -31,8 +31,19 @@
     outputs = inputs@{ deploy, nixos, nur, self, utils, ... }:
       let
         lib = import ./lib { inherit self nixos inputs; };
+        inherit (lib.os) importIfExists;
       in
-      lib.mkDevos {
+      lib.mkFlake {
         inherit self;
+        hosts = ./hosts;
+        packages = importIfExists ./pkgs;
+        suites = importIfExists ./suites;
+        extern = importIfExists ./extern;
+        overrides = importIfExists ./overrides;
+        overlays = ./overlays;
+        profiles = ./profiles;
+        userProfiles = ./users/profiles;
+        modules = importIfExists ./modules/module-list.nix;
+        userModules = importIfExists ./users/modules/module-list.nix;
       };
 }
