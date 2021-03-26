@@ -9,7 +9,6 @@
 
       overlays = [
         (overridesOverlay overridePkgs)
-        self.overlay
         (final: prev: {
           lib = prev.lib.extend (lfinal: lprev: {
             inherit dev;
@@ -18,6 +17,7 @@
             utils = inputs.utils.lib;
           });
         })
+        self.overlay
       ]
       ++ extern.overlays
       ++ (lib.attrValues self.overlays);
