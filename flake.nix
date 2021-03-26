@@ -35,7 +35,10 @@
 
       extern = import ./extern { inherit inputs; };
 
-      multiPkgs = os.mkPkgs;
+      multiPkgs = os.mkPkgs {
+        inherit extern;
+        overrides = import ./overrides;
+      };
 
       outputs = {
         nixosConfigurations =
