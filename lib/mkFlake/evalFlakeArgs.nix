@@ -22,6 +22,7 @@ let
           type = path;
           default = "${self}/hosts";
           defaultText = "\${self}/hosts";
+          apply = toString;
           description = "Path to directory containing host configurations";
         };
         packages = mkOption {
@@ -56,14 +57,14 @@ let
           type = path;
           default = "${self}/profiles";
           defaultText = "\${self}/profiles";
-          apply = os.mkProfileAttrs;
+          apply = x: os.mkProfileAttrs (toString x);
           description = "path to profiles folder";
         };
         userProfiles = mkOption {
           type = path;
           default = "${self}/users/profiles";
           defaultText = "\${self}/users/profiles";
-          apply = os.mkProfileAttrs;
+          apply = x: os.mkProfileAttrs (toString x);
           description = "path to user profiles folder";
         };
         suites =
@@ -87,7 +88,7 @@ let
           type = path;
           default = "${self}/users";
           defaultText = "\${self}/users";
-          apply = os.mkProfileAttrs;
+          apply = x: os.mkProfileAttrs (toString x);
           description = "path to folder containing user profiles";
         };
         extern =
@@ -113,7 +114,7 @@ let
           type = path;
           default = "${self}/overlays";
           defaultText = "\${self}/overlays";
-          apply = x: dev.pathsToImportedAttrs (dev.pathsIn x);
+          apply = x: dev.pathsToImportedAttrs (dev.pathsIn (toString x));
           description = "path to folder containing overlays which will be applied to pkgs";
         };
         overrides = mkOption rec {
