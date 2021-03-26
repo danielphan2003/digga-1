@@ -7,7 +7,13 @@
       config = { allowUnfree = true; };
     };
 
+  importIfExists = path: lib.mkIf (builtins.pathExists path) (import path);
+
   profileMap = map (profile: profile.default);
+
+  evalDevosArgs = dev.callLibs ./evalDevosArgs.nix;
+
+  mkDevos = dev.callLibs ./mkDevos.nix;
 
   mkNodes = dev.callLibs ./mkNodes.nix;
 

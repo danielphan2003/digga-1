@@ -17,6 +17,7 @@ lib.makeExtensible (final:
     lists = callLibs ./lists.nix;
     strings = callLibs ./strings.nix;
 
+    mkFlake = callLibs ./mkFlake;
     evalFlakeArgs = callLibs ./mkFlake/evalFlakeArgs.nix;
 
     inherit (attrs) mapFilterAttrs genAttrs' pathsToImportedAttrs concatAttrs;
