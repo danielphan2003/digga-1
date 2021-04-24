@@ -36,68 +36,57 @@ lib.systemFlake
       ++ cfg.os.hostDefaults.externalModules
       [ ]
     ;
-    builder = os.devosSystem;
+    builder = os.devosSystem { inherit self nixos inputs; };
     inherit (cfg.os.hostDefaults)
       channelName
       system;
   };
 
-  hosts =
+  nixosModules = lib.exporters.moduleFromListExporter cfg.os.hostDefaults.modules;
+
+  overlays = lib.exporters.overlaysFromChannelsExporter cfg.channels;
+  packagesBuilder = lib.builders.packagesFromOverlaysBuilderConstructor self.pkgs;
+
+  homeModules = lib.exporters.moduleFromListExporter cfg.home.modules;
+  homeConfigurations = os.mkHomeConfigurations self.nixosConfigurations;
+
+  deploy.nodes = os.mkNodes deploy self.nixosConfigurations;
+
+  checksBuilder = channels:
+    let
+      pkgs-lib =
+        pkgs-lib.tests.mkChecks {
+          inherit (self.deploy) nodes;
+          hosts = self.nixosConfigurations;
+          homes = self.homeConfigurations;
+        };
 
 
 
+      outputs = {
+        nixosConfigurations = os.mkHosts
+          {
+            inherit self inputs nixos multiPkgs;
+            inherit (cfg) extern suites overrides;
+            dir = cfg.hosts;
+          };
 
-    }
+      };
 
+      systemOutputs = lib.eachDefaultSystem (system:
+        let
+          pkgs-lib = lib.pkgs-lib.${system};
+          # all packages that are defined in ./pkgs
+          };
+          in
+          {
+          checks = ;
 
-      multiPkgs = os.mkPkgs
-  {
-  inherit self inputs nixos;
-  inherit (cfg) extern overrides;
-};
+            inherit legacyPackages;
+          packages = lib.filterPackages system legacyPackages;
 
-outputs = {
-nixosConfigurations = os.mkHosts
-{
-inherit self inputs nixos multiPkgs;
-inherit (cfg) extern suites overrides;
-dir = cfg.hosts;
-};
-
-homeConfigurations = os.mkHomeConfigurations self.nixosConfigurations;
-
-nixosModules = cfg.modules;
-
-homeModules = cfg.userModules;
-
-overlay = cfg.packages;
-inherit (cfg) overlays;
-
-deploy.nodes = os.mkNodes deploy self.nixosConfigurations;
-};
-
-systemOutputs = lib.eachDefaultSystem (system:
-let
-pkgs = multiPkgs.${system};
-pkgs-lib = lib.pkgs-lib.${system};
-# all packages that are defined in ./pkgs
-legacyPackages = os.mkPackages {
-inherit pkgs;
-inherit (self) overlay overlays;
-};
-in
-{
-checks = pkgs-lib.tests.mkChecks {
-inherit (self.deploy) nodes;
-hosts = self.nixosConfigurations;
-homes = self.homeConfigurations;
-};
-
-inherit legacyPackages;
-packages = lib.filterPackages system legacyPackages;
-
-devShell = pkgs-lib.shell;
-});
-in
-outputs // systemOutputs
+          devShell = pkgs-lib.shell;
+          });
+          in
+          outputs // systemOutputs
 

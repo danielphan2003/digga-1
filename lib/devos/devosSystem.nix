@@ -1,28 +1,31 @@
 { lib }:
 
-{ self, nixos, inputs, modules, ... } @ allArgs:
-let args = builtins.removeAttrs allArgs [ "self" "nixos" "inputs" ]; in
+# dependencies to return a builder
+{ self, nixos, inputs }:
+
+{ modules, ... } @ args:
 lib.nixosSystem (args // {
   modules =
     let
-      moduleList = builtins.attrValues modules;
+      modpath = "nixos/modules";
 
-      fullHostConfig = (lib.nixosSystem (args // { modules = moduleList; })).config;
+      fullHostConfig = (lib.nixosSystem (args // { inherit modules; })).config;
 
       isoConfig = (lib.nixosSystem
         (args // {
-          modules = moduleList ++ [
+          modules = modules ++ [
             (lib.modules.iso { inherit self nixos inputs fullHostConfig; })
           ];
         })).config;
+
       hmConfig = (lib.nixosSystem
         (args // {
-          modules = moduleList ++ [
+          modules = modules ++ [
             (lib.modules.hmConfig)
           ];
         })).config;
     in
-    moduleList ++ [{
+    modules ++ [{
       system.build = {
         iso = isoConfig.system.build.isoImage;
         homes = hmConfig.home-manager.users;
