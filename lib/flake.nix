@@ -5,7 +5,7 @@
     {
       deploy.url = "github:serokell/deploy-rs";
       devshell.url = "github:numtide/devshell";
-      utils.url = "github:numtide/flake-utils";
+      utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
     };
 
   outputs = inputs@{ self, nixpkgs, deploy, devshell, utils, ... }:
@@ -33,6 +33,9 @@
             __functor = import ./mkFlake {
               lib = nixpkgs.lib // self;
               inherit deploy;
+            };
+            mkOldFlake = import ./mkFlake/mkOldFlake.nix {
+              lib = nixpkgs.lib // self;
             };
             evalArgs = import ./mkFlake/evalArgs.nix { lib = nixpkgs.lib // self; };
             evalOldArgs = import ./mkFlake/evalOldArgs.nix { lib = nixpkgs.lib // self; };
