@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
-        <base href="/">
+        <title>Home - Digga Library Docs</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -76,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="api-reference.html"><strong aria-hidden="true">2.</strong> API Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api-reference-channels.html"><strong aria-hidden="true">2.1.</strong> Channels</a></li><li class="chapter-item expanded "><a href="api-reference-home.html"><strong aria-hidden="true">2.2.</strong> Home</a></li><li class="chapter-item expanded "><a href="api-reference-devshell.html"><strong aria-hidden="true">2.3.</strong> Devshell</a></li><li class="chapter-item expanded "><a href="api-reference-nixos.html"><strong aria-hidden="true">2.4.</strong> NixOS</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Library Reference</div></li><li class="chapter-item expanded "><a href="CONTRIBUTING.html"><strong aria-hidden="true">4.</strong> Contributing</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="api-reference.html"><strong aria-hidden="true">2.</strong> API Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api-reference-channels.html"><strong aria-hidden="true">2.1.</strong> Channels</a></li><li class="chapter-item expanded "><a href="api-reference-home.html" class="active"><strong aria-hidden="true">2.2.</strong> Home</a></li><li class="chapter-item expanded "><a href="api-reference-devshell.html"><strong aria-hidden="true">2.3.</strong> Devshell</a></li><li class="chapter-item expanded "><a href="api-reference-nixos.html"><strong aria-hidden="true">2.4.</strong> NixOS</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Library Reference</div></li><li class="chapter-item expanded "><a href="CONTRIBUTING.html"><strong aria-hidden="true">4.</strong> Contributing</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -135,19 +134,112 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1 id="home-manager-api-container"><a class="header" href="#home-manager-api-container">Home-Manager API Container</a></h1>
+<p>Configure your home manager modules, profiles &amp; suites.</p>
+<h2 id="home"><a class="header" href="#home">home</a></h2>
+<p>hosts, modules, suites, and profiles for home-manager</p>
+<p><em><em>Type</em></em>:
+submodule or path convertible to it</p>
+<p><em><em>Default</em></em></p>
+<pre><code>{}
+</code></pre>
+<h2 id="homeexportedmodules"><a class="header" href="#homeexportedmodules">home.exportedModules</a></h2>
+<p>modules to include in all hosts and export to homeModules output</p>
+<p><em><em>Type</em></em>:
+list of valid modules or anything convertible to it or path convertible to it</p>
+<p><em><em>Default</em></em></p>
+<pre><code>[]
+</code></pre>
+<h2 id="homeexternalmodules"><a class="header" href="#homeexternalmodules">home.externalModules</a></h2>
+<p>The <code>externalModules</code> option has been removed.
+Any modules that should be exported should be defined with the <code>exportedModules</code>
+option and all other modules should just go into the <code>modules</code> option.</p>
+<p><em><em>Type</em></em>:
+list of valid modules or anything convertible to it</p>
+<p><em><em>Default</em></em></p>
+<pre><code>[]
+</code></pre>
+<h2 id="homeimportables"><a class="header" href="#homeimportables">home.importables</a></h2>
+<p>Packages of paths to be passed to modules as <code>specialArgs</code>.</p>
+<p><em><em>Type</em></em>:
+attribute set</p>
+<p><em><em>Default</em></em></p>
+<pre><code>{}
+</code></pre>
+<h2 id="homeimportablessuites"><a class="header" href="#homeimportablessuites">home.importables.suites</a></h2>
+<p>collections of profiles</p>
+<p><em><em>Type</em></em>:
+null or attribute set of list of paths or anything convertible to its or path convertible to it</p>
+<p><em><em>Default</em></em></p>
+<pre><code>null
+</code></pre>
+<h2 id="homemodules"><a class="header" href="#homemodules">home.modules</a></h2>
+<p>modules to include that won't be exported
+meant importing modules from external flakes</p>
+<p><em><em>Type</em></em>:
+list of valid modules or anything convertible to it or path convertible to it</p>
+<p><em><em>Default</em></em></p>
+<pre><code>[]
+</code></pre>
+<h2 id="homeprofiles"><a class="header" href="#homeprofiles">home.profiles</a></h2>
+<p>WARNING: The 'suites' and <code>profiles</code> options have been deprecated, you can now create
+both with the importables option. <code>rakeLeaves</code> can be used to create profiles and
+by passing a module or <code>rec</code> set to <code>importables</code>, suites can access profiles.
+Example:</p>
+<pre><code>importables = rec {
+  profiles = digga.lib.rakeLeaves ./profiles;
+  suites = with profiles; { };
+}
+</code></pre>
+<p>See https://github.com/divnix/digga/pull/30 for more details</p>
+<p><em><em>Type</em></em>:
+list of paths or path convertible to it</p>
+<p><em><em>Default</em></em></p>
+<pre><code>[]
+</code></pre>
+<h2 id="homesuites"><a class="header" href="#homesuites">home.suites</a></h2>
+<p>WARNING: The 'suites' and <code>profiles</code> options have been deprecated, you can now create
+both with the importables option. <code>rakeLeaves</code> can be used to create profiles and
+by passing a module or <code>rec</code> set to <code>importables</code>, suites can access profiles.
+Example:</p>
+<pre><code>importables = rec {
+  profiles = digga.lib.rakeLeaves ./profiles;
+  suites = with profiles; { };
+}
+</code></pre>
+<p>See https://github.com/divnix/digga/pull/30 for more details</p>
+<p><em><em>Type</em></em>:
+function that evaluates to a(n) attrs or path convertible to it</p>
+<h2 id="homeusers"><a class="header" href="#homeusers">home.users</a></h2>
+<p>HM users that can be deployed portably without a host.</p>
+<p><em><em>Type</em></em>:
+attribute set of HM user configs</p>
+<p><em><em>Default</em></em></p>
+<pre><code>{}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="api-reference-channels.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="api-reference-devshell.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         <div style="clear: both"></div>
                     </nav>
                 </div>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="api-reference-channels.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="api-reference-devshell.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
