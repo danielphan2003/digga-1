@@ -44,6 +44,7 @@ in
     # (docs python3Packages.grip) too many deps
     (docs mdbook)
     (devos inputs.deploy.packages.${pkgs.system}.deploy-rs)
+    (devos inputs.nixos-generators.${pkgs.system}.defaultPackage)
   ]
 
   ++ lib.optional
