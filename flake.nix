@@ -48,7 +48,6 @@
 
       internal-modules = import ./src/modules.nix {
         inherit (nixlib) lib;
-        inherit nixos-generators;
       };
 
       importers = import ./src/importers.nix {
